@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form</title>
-</head>
-<body>
-    <div class="form" style="display: flex; justify-content: center;">
-        <form action="/product" method="POST">
-            <input type="text" name="product name">
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</body>
+<html>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/">Shop</a></li>
+                    <li><a href="/add-product">Add Product</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <form action="/add-product" method="POSt">
+                <input type="text" name="title"> 
+                <button type="submit">Add Product</button> 
+            </form>
+        </main>
+    </body>
 </html>

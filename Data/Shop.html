@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style>
+      .main-header {
+        height: 54px;
+        width: 100%;
+        background-color: #d0f01a;
+      }
+      .main-header-nav {
+        display: flex;
+        align-items: center;
+      }
+      .main-header-itemlist {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        margin: 20px;
+      }
+      .main-header-item a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin-left: 20px;
+      }
+      .main-header-item-a:active,
+      .main-header-item a:hover,
+      .main-header-item a:active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="main-header-nav">
+        <ul class="main-header-itemlist">
+          <li class="main-header-item"><a href="/" class="active">Shop</a></li>
+          <li class="main-header-item">
+            <a href="/add-product">Add Product</a>
+          </li>
+          <li class="main-header-item">
+            <a href="/contact-us" class="active">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>Products</h2>
+      <p>List of all products</p>
+    </main>
+  </body>
+</html>
