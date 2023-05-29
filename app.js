@@ -1,4 +1,4 @@
-const http=require("http");
+/* const http=require("http");
 const express=require("express");
 const bodyParser=require('body-parser');
 const app=express();
@@ -54,17 +54,16 @@ app.use("/add",(req,res,next)=>{
 //     <input type="text" name="productSize" placeholder="Product Size" />
 //     <button type="submit">Add Product</button>
 //   </form>`);
-  
-// });
 
+// });
 
 // app.post('/product', (req, res) => {
 //     console.log(req.body);
 //     res.redirect('/product');
 //   });
-  
+
 //   app.get('/product', (req, res) => {
-   
+
 //     res.send('Product Page');
 //   });
 
@@ -73,7 +72,52 @@ app.use("/add",(req,res,next)=>{
 //     res.send("Hello Im Home");
 // })
 
-// Start the server
+// Start the server  */
 
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+const app = express();
+const loginRouter = require("./GroupChat.js/LoginRouter");
+const bodyParser = require("body-parser");
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(loginRouter);
 
+const chatFilePath = path.join(__dirname, "GroupChat", "chat.txt");
+
+app.get("/", (req, res) => {
+  fs.readFile(chatFilePath, "utf8", (err, data) => {
+    if (err) {
+      res.send("Something went wrong");
+      return;
+    }
+    res.send(`${data}`);
+  });
+});
+
+app.post("/sentMessage", (req, res) => {
+  const username = req.body.username;
+  const message = req.body.typeMessage;
+  const data = `${username}:${message}`;
+
+  fs.appendFile(chatFilePath, data, (err) => {
+    if (err) console.log(err);
+  });
+
+  res.redirect("/");
+});
+
+// Create the chat file if it doesn't exist
+fs.access(chatFilePath, fs.constants.F_OK, (err) => {
+  if (err) {
+    fs.writeFile(chatFilePath, "", (err) => {
+      if (err) console.log(err);
+    });
+  }
+});
+
+// server portal
+app.listen(4000, () => {
+  console.log("listening to requests");
+});
