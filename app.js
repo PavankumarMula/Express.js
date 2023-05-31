@@ -2,36 +2,22 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const app = express();
-const Shop=require('./routes/shopRoutes');
-
 const bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ extended: false }));
+const homeRouter = require("./routes/homeRoute");
+const addProductPage = require("./routes/addProduct");
+const contactPage = require("./routes/contactRoute");
 
-app.use(Shop);
- 
-//showing user a form to fill up the data
-app.get('/contact',(req,res)=>{
-  const filePath=path.join(__dirname,"./","Data","Contact.html");
-  res.sendFile(filePath);
-})
+// Parse JSON bodies
+app.use(bodyParser.json());
 
-//redirectiring the user to "/sucess url"
-app.post('/submit',(req,res)=>{
-  console.log(req.body);
-  res.redirect("/sucess");
-})
+// Parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
-//showing the user a sucess message
-app.get("/sucess",(req,res)=>{
-  res.send("Form Submitted Sucessfully");
-})
-
-//sending error message to user if he hits random url
-app.use((req,res)=>{
-  const filePath=path.join(__dirname, "./",'Data', '404Error.html');
-  res.status(404).sendFile(filePath);
-})
+//Routes
+app.use(addProductPage);
+app.use(contactPage);
+app.use(homeRouter);
 
 // server portal
 app.listen(4000, () => {
